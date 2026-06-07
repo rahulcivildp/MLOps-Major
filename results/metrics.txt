@@ -1,0 +1,71 @@
+
+    ==========================
+    Model: DecisionTreeClassifier
+    ==========================
+    Accuracy  : 0.533333
+    Model saved: saved_models/DecisionTreeClassifier.pkl
+
+    
+    ==========================
+    Model: DecisionTreeClassifier
+    ==========================
+    Accuracy  : 0.533333
+    Model saved: saved_models/savedmodel.pth
+
+    
+    ==========================
+    Model: DecisionTreeClassifier
+    ==========================
+    Accuracy  : 0.533333
+    Model saved: saved_models/savedmodel.pth
+
+    
+    ==========================
+    Model: DecisionTreeClassifier
+    ==========================
+    Accuracy  : 0.533333
+    Model saved: saved_models/savedmodel.pth
+
+    
+    ==========================
+    Model: DecisionTreeClassifier
+    ==========================
+    Accuracy  : 0.533333
+    Model saved: saved_models/savedmodel.pth
+
+    ============================================================
+                   MODEL TRAINING RESULTS                   
+============================================================
+
+Metric                                 Value
+   ------                   -----           
+Model                 DecisionTreeClassifier
+Accuracy                            0.533333
+Model saved      saved_models/savedmodel.pth
+
+============================================================
+
+
+============================================================
+               Model: DecisionTreeClassifier                
+============================================================
+
+        Metric           Value                      
+        ------           -----                      
+        Accuracy         0.533333                   
+        Model saved      saved_models/savedmodel.pth
+
+============================================================
+
+
+============================================================
+               Model: DecisionTreeClassifier                
+============================================================
+
+        Metric           Value                      
+        ------           -----                      
+        Accuracy         0.533333                   
+        Model saved      saved_models/savedmodel.pth
+
+============================================================
+
