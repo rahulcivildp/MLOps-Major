@@ -3,3 +3,9 @@ pandas
 scikit-learn
 joblib
 matplotlib
+
+# Web dependencies
+flask
+numpy
+pillow
+gunicorn

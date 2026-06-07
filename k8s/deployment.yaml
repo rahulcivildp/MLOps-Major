@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: olivetti-face-deployment
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: olivetti-face-app
+
+  template:
+    metadata:
+      labels:
+        app: olivetti-face-app
+
+    spec:
+      containers:
+      - name: olivetti-face-app
+
+        image: rahulcivildp/olivetti-face-app:0.1
+
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 5000

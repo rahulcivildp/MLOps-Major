@@ -1,0 +1,203 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Olivetti AI Face Scanner</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <h1>Olivetti AI Face Scanner</h1>
+        <p>
+          Upload a face image and get a live Decision Tree prediction. This UI
+          is built to feel futuristic, polished, and easy to use.
+        </p>
+        <div class="hero-actions">
+          <a href="#upload-form">Start Prediction</a>
+          <button
+            onclick="
+              document
+                .getElementById('how-it-works')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+            type="button"
+          >
+            How it works
+          </button>
+        </div>
+      </section>
+      <main>
+        <section class="card upload-panel" id="upload-form">
+          <div class="section-headline">
+            <h2>Upload your face image</h2>
+            <p>
+              Select a clear portrait photo, preview it instantly, and send it
+              to the classifier for a fast person ID prediction.
+            </p>
+          </div>
+          <form
+            action="/predict"
+            enctype="multipart/form-data"
+            id="predictionForm"
+            method="post"
+          >
+            <div class="upload-grid">
+              <div class="panel-block">
+                <div class="upload-label">Select image</div>
+                <label class="upload-input" for="image">
+                  <div aria-hidden="true" class="drop-icon">
+                    <svg
+                      fill="none"
+                      viewbox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 3v12"
+                        stroke="#e9f9ff"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.6"
+                      ></path>
+                      <path
+                        d="M8 7l4-4 4 4"
+                        stroke="#e9f9ff"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.6"
+                      ></path>
+                      <rect
+                        height="6"
+                        rx="2"
+                        stroke="#cfeeff"
+                        stroke-width="1.2"
+                        width="18"
+                        x="3"
+                        y="13"
+                      ></rect>
+                    </svg>
+                  </div>
+                  <div class="upload-text">
+                    <span>Click or drag to upload</span>
+                    <small class="small">PNG / JPG — up to 5MB</small>
+                  </div>
+                  <input
+                    accept="image/*"
+                    id="image"
+                    name="image"
+                    required=""
+                    type="file"
+                  />
+                </label>
+                <div class="submit-row">
+                  <button class="btn btn-primary" type="submit">
+                    Analyze Face
+                  </button>
+                </div>
+              </div>
+              <div aria-live="polite" class="panel-block preview-area">
+                <img alt="Image preview" hidden="" id="preview" src="" />
+                <span id="previewText">No image selected yet.</span>
+              </div>
+            </div>
+          </form>
+        </section>
+        <section class="card" id="how-it-works">
+          <div class="section-headline">
+            <h2>Why Decision Trees?</h2>
+            <p>
+              Decision Tree classifiers are lightweight, interpretable, and
+              reliable for structured face embeddings. Here’s what makes this
+              demo powerful.
+            </p>
+          </div>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <strong>Instant inference</strong>
+              <p>
+                Predicts person identity in one pass without heavy model
+                overhead—great for prototype apps and demos.
+              </p>
+            </div>
+            <div class="feature-card">
+              <strong>Easy to explain</strong>
+              <p>
+                Each output is based on rule splits, so you can inspect and
+                understand the classification path.
+              </p>
+            </div>
+            <div class="feature-card">
+              <strong>Feature-driven</strong>
+              <p>
+                Works well when image pixels are converted into compact feature
+                vectors before classification.
+              </p>
+            </div>
+            <div class="feature-card">
+              <strong>Ready for expansion</strong>
+              <p>
+                Add confidence, visual analytics, or compare model versions for
+                an even smarter interface.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div class="modal" id="resultModal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <h3>Prediction Result</h3>
+        <div aria-hidden="true" class="modal-loader" id="modalLoader">
+          <div style="display: flex; align-items: center; gap: 12px">
+            <div aria-hidden="true" class="progress-bar">
+              <i id="progressBar"></i>
+            </div>
+            <div class="percent" id="progressPercent">0%</div>
+            <button
+              class="btn btn-secondary btn-cancel"
+              id="cancelBtn"
+              type="button"
+            >
+              Cancel
+            </button>
+          </div>
+          <div aria-hidden="true" class="loader-dots">
+            Analyzing<span class="dot">.</span><span class="dot">.</span
+            ><span class="dot">.</span>
+          </div>
+        </div>
+        <p id="resultText" style="opacity: 0">
+          {{ prediction|default('Awaiting image upload...', true) }}
+        </p>
+        <div style="display: flex; gap: 10px; justify-content: flex-end">
+          <button
+            class="btn btn-secondary"
+            onclick="closeModal()"
+            type="button"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const prediction = `{{ prediction|e | default('', true) }}`;
+      if (prediction.trim()) {
+        showModal(prediction);
+      }
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

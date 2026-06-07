@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  olivetti-face-app:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: rahulcivildp/olivetti-face-app:0.1
+    container_name: olivetti-face-app
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
